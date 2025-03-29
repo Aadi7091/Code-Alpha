@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #333;
+            color: #fff;
+        }
+        .player {
+            text-align: center;
+            background: #444;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .player button {
+            background: #007BFF;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .player button:hover {
+            background: #0056b3;
+        }
+        .track-info {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="player">
+        <div class="track-info" id="track-info">Track: None</div>
+        <audio id="audio" src="track1.mp3"></audio>
+        <button onclick="playMusic()">Play</button>
+        <button onclick="pauseMusic()">Pause</button>
+        <button onclick="nextTrack()">Next</button>
+        <button onclick="prevTrack()">Previous</button>
+    </div>
+
+    <script>
+const audio = document.getElementById('audio');
+const trackInfo = document.getElementById('track-info');
+const tracks = [
+    'C:/Users/abhis/Downloads/Russian_Bandana_Dhanda_Nyoliwala.mp3',
+    'C:/Users/abhis/Downloads/Blender_feat_Dev_ChouhanPooja_Saxena_Masoom_Sharma_Swara_Verma.mp3',
+    'C:/Users/abhis/Downloads/4_5_Pistol_feat_Masoom_SharmaDev_ChouhanShivani_Yadav_Masoom_Sharma_Swara_Verma.mp3'
+];
+let currentTrackIndex = 0; // Initialize track index
+
+function playMusic() {
+    audio.src = tracks[currentTrackIndex]; // Ensure audio src is set correctly
+    audio.play();
+    trackInfo.textContent = `Playing: ${tracks[currentTrackIndex].split('/').pop()}`;
+}
+
+function pauseMusic() {
+    audio.pause();
+}
+
+function nextTrack() {
+    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+    audio.src = tracks[currentTrackIndex];
+    playMusic();
+}
+
+function prevTrack() {
+    currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+    audio.src = tracks[currentTrackIndex];
+    playMusic();
+}
+
+    </script>
+</body>
+</html>
